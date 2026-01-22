@@ -1,0 +1,128 @@
+# Configuration for ARG contrastive retrieval fine-tuning
+
+run_name: pretrained_model_name
+
+data_local: /path/to/arg/data/dataset_name/contrastive
+max_seq_len: 128
+
+# Model configuration
+model:
+  name: flex_bert
+  num_labels: 3
+  pretrained_model_name: bert-base-uncased
+  pretrained_checkpoint: /path/to/checkpoints/pretrained_model_name/latest-rank0.pt
+  tokenizer_name: argformer
+  model_config:
+    max_seq_len: ${max_seq_len}
+    masking_option: default
+    pooling_type: mean
+    dataset:
+      local: ${data_local}
+      split: train
+    num_attention_heads: 12
+    num_hidden_layers: 12
+    attention_layer: rope
+    attention_probs_dropout_prob: 0.0
+    attn_out_bias: false
+    attn_out_dropout_prob: 0.0
+    attn_qkv_bias: false
+    bert_layer: prenorm
+    embed_dropout_prob: 0.15
+    embed_norm: false
+    final_norm: true
+    embedding_layer: sans_pos
+    mlp_dropout_prob: 0.05
+    mlp_in_bias: false
+    mlp_layer: mlp
+    mlp_out_bias: false
+    normalization: rmsnorm
+    norm_kwargs:
+      eps: 1e-6
+    padding: unpadded
+    sparse_prediction: false
+    hidden_act: gelu
+
+  contrastive:
+    temperature: 0.3
+    normalize: true
+    symmetric: true
+    similarity: dot
+    use_class_weights: true
+
+# Training data loader
+train_loader:
+  name: arg
+  local: ${data_local}
+  split: train
+  max_seq_len: ${max_seq_len}
+  labels_file: "labels.pkl"
+  shuffle: true
+  drop_last: true
+  num_workers: 4
+  balanced_sampling: false
+  skip_extant_tokens: true
+  num_hard_negatives: 2
+  negative_sampling_temperature: 1.0
+
+# Evaluation data loader
+eval_loader:
+  name: arg
+  local: ${data_local}
+  split: val
+  max_seq_len: ${max_seq_len}
+  labels_file: "labels.pkl"
+  shuffle: false
+  drop_last: false
+  num_workers: 4
+  skip_extant_tokens: true
+
+# Optimization
+scheduler:
+  name: linear_decay_with_warmup
+  t_warmup: 0.1dur
+  alpha_f: 0.02
+
+optimizer:
+  name: decoupled_adamw
+  lr: 2.0e-5
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-06
+  weight_decay: 1.0e-6
+
+max_duration: 1ep
+eval_interval: 20ba
+eval_subset_num_batches: 200
+global_train_batch_size: 4096
+
+# System
+seed: 36
+device_train_microbatch_size: 4096
+precision: fp32
+
+global_eval_batch_size: 4096
+device_eval_microbatch_size: 4096
+
+# Logging
+progress_bar: false
+log_to_console: true
+console_log_interval: 5ba
+python_log_level: "INFO"
+
+callbacks:
+  speed_monitor:
+    window_size: 5
+  lr_monitor: {}
+
+loggers:
+  wandb:
+    project: ARGformer
+    # entity: your_wandb_entity  # Uncomment and set your wandb entity name
+
+save_interval: 20ba
+save_num_checkpoints_to_keep: -1
+save_folder: /path/to/checkpoints/${run_name}
+save_overwrite: true
+autoresume: false
+load_path: /path/to/checkpoints/${run_name}/latest-rank0.pt
