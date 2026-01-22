@@ -1,4 +1,5 @@
-# ARGformer: ModernBERT for Ancestral Recombination Graph Data
+# ARGformer: learning on ancestral recombination
+graphs with transformers
 
 ARGformer is a transformer encoder based on [ModernBERT](https://github.com/AnswerDotAI/ModernBERT) for Ancestral Recombination Graph (ARG) data. It uses the FlexBERT architecture with YAML-based configuration.
 
