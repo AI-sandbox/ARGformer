@@ -49,7 +49,6 @@ from src.callbacks.dataloader_speed import DataloaderSpeedMonitor
 from src.callbacks.log_grad_norm import LogGradNorm
 from src.callbacks.packing_efficiency import PackingEfficency
 from src.callbacks.scheduled_gc import ScheduledGarbageCollector
-from src.callbacks.unique_token_coverage import UniqueTokenCoverage
 from src.scheduler import CosineInverseSqrtScheduler, OneMinusSqrtScheduler, WarmupStableDecayScheduler
 from src.sequence_packer import get_num_samples_in_packed_batch, split_packed_batch
 
@@ -193,13 +192,6 @@ def build_callback(name, kwargs):
         return DataloaderSpeedMonitor()
     elif name == "packing_efficiency":
         return PackingEfficency(log_interval=kwargs.get("log_interval", 10))
-    elif name == "unique_token_coverage":
-        return UniqueTokenCoverage(
-            log_interval=kwargs.get("log_interval", 10),
-            ignore_special_tokens=kwargs.get("ignore_special_tokens", True),
-            extra_ignore_ids=kwargs.get("extra_ignore_ids", None),
-            sync_global=kwargs.get("sync_global", True),
-        )
     else:
         raise ValueError(f"Not sure how to build callback: {name}")
 

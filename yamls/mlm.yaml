@@ -140,10 +140,6 @@ callbacks:
   speed_monitor:
     window_size: 10
   lr_monitor: {}
-  unique_token_coverage:
-    log_interval: 10
-    ignore_special_tokens: true
-    sync_global: true
 
 loggers:
   wandb:
