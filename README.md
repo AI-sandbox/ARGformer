@@ -97,3 +97,20 @@ Key configuration sections:
 - `train_loader` / `eval_loader`: Dataset paths and data loading settings
 - `optimizer` / `scheduler`: Training hyperparameters
 - `loggers`: WandB logging configuration
+
+
+## Citation
+
+If you use **ARGformer** in your research, please cite [our paper](https://doi.org/10.64898/2026.02.11.705405):
+
+```bibtex
+@article{bonet2026argformer,
+  title={{ARGformer}: learning on ancestral recombination graphs with transformers},
+  author={Bonet, David and Shanks, Cole and Cara, Marçal Comajoan and Abante, Jordi and Ioannidis, Alexander G},
+  journal={bioRxiv},
+  pages={2026--02},
+  year={2026},
+  doi = {10.64898/2026.02.11.705405},
+  publisher={Cold Spring Harbor Laboratory}
+}
+```
