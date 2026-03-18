@@ -1,10 +1,18 @@
-# ARGformer: learning on ancestral recombination graphs with transformers
+<p align="center">
+  <img src="docs/assets/ARGformer_logo.png" alt="ARGformer logo" width="760">
+</p>
+
+
+
+<h1 align="center">
+  Learning on ancestral recombination graphs with transformers
+</h1>
 
 ARGformer is a transformer encoder based on [ModernBERT](https://github.com/AnswerDotAI/ModernBERT) for Ancestral Recombination Graph (ARG) data. It uses the FlexBERT architecture with YAML-based configuration.
 
-The codebase builds upon [MosaicBERT](https://github.com/mosaicml/examples/tree/main/examples/benchmarks/bert) and the [unmerged fork with Flash Attention 2](https://github.com/Skylion007/mosaicml-examples/tree/skylion007/add-fa2-to-bert) under Apache 2.0 license.
+The codebase builds upon [MosaicBERT](https://github.com/mosaicml/examples/tree/main/examples/benchmarks/bert) and the [fork with Flash Attention 2](https://github.com/Skylion007/mosaicml-examples/tree/skylion007/add-fa2-to-bert) under Apache 2.0 license.
 
-For ModernBERT details, see the [release blog post](https://huggingface.co/blog/modernbert) and [arXiv preprint](https://arxiv.org/abs/2412.13663).
+For ModernBERT details, see the [release blog post](https://huggingface.co/blog/modernbert).
 
 
 ## Setup
