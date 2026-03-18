@@ -9,9 +9,30 @@ For ModernBERT details, see the [release blog post](https://huggingface.co/blog/
 
 ## Setup
 
+### Install `pixi`
+
+If you do not have `pixi` installed or are not familiar with it, `pixi` is a fast alternative to tools like `conda` and `pip` for managing environments and Python packages. You can install it with:
+
 ```bash
-conda env create -f environment.yaml
-conda activate bert24
+curl -fsSL https://pixi.sh/install.sh | sh
+```
+
+Once `pixi` is installed, create and enter the environment with:
+
+```bash
+pixi install
+pixi shell
+```
+
+Verify that the solve produced a CUDA-enabled PyTorch build before installing FlashAttention:
+
+```bash
+python -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda._is_compiled())"
+```
+
+The base `pixi` environment does not include `flash-attn`. Install it separately inside the `pixi` shell if you want FlashAttention 2 support:
+
+```bash
 pip install "flash_attn==2.6.3" --no-build-isolation
 ```
 

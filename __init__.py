@@ -31,14 +31,8 @@ try:
     from src.hf_bert import create_hf_bert_classification, create_hf_bert_mlm
     from src.mosaic_bert import create_mosaic_bert_classification, create_mosaic_bert_mlm
 except ImportError as e:
-    try:
-        is_cuda_available = torch.cuda.is_available()  # type: ignore
-    except Exception:
-        is_cuda_available = False
-
-    reqs_file = "requirements.txt" if is_cuda_available else "requirements-cpu.txt"
     raise ImportError(
-        f"Please make sure to pip install -r {reqs_file} to get the requirements for the BERT benchmark."
+        "Install project dependencies with `pixi install`."
     ) from e
 
 __all__ = [

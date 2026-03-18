@@ -536,7 +536,7 @@ def main(cfg: DictConfig, return_trainer: bool = False, do_train: bool = True) -
 
 if __name__ == "__main__":
     yaml_path, args_list = sys.argv[1], sys.argv[2:]
-    with open("yamls/defaults.yaml") as f:
+    with open("yamls/mlm.yaml") as f:
         default_cfg = om.load(f)
     with open(yaml_path) as f:
         yaml_cfg = om.load(f)
