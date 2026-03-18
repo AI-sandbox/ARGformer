@@ -2,8 +2,6 @@
   <img src="docs/assets/ARGformer_logo.png" alt="ARGformer logo" width="760">
 </p>
 
-
-
 <h1 align="center">
   Learning on ancestral recombination graphs with transformers
 </h1>
